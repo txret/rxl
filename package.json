@@ -1,0 +1,112 @@
+{
+  "name": "rxl",
+  "displayName": "Rx lib",
+  "version": "1.0.0",
+  "publisher": "txret",
+  "description": "Create a library of `sed` style regular expressions for re-use.",
+  "author": {
+    "name": "txret"
+  },
+  "icon": "icon.png",
+  "categories": [
+    "Other",
+    "Formatters"
+  ],
+  "keywords": [
+    "rxl",
+    "rx",
+    "re",
+    "regex",
+    "regexp",
+    "regular",
+    "expression",
+    "find",
+    "match",
+    "replace",
+    "substitute"
+  ],
+  "engines": {
+    "vscode": "^1.63.0"
+  },
+  "main": "dist/extension.js",
+  "files": [
+    "dist/extension.js",
+    "dist/sedrx.js",
+    "package.json",
+    "LICENSE",
+    "icon.png"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -watch",
+    "clean": "shx rm -rf dist package",
+    "package": "vsce package"
+  },
+  "activationEvents": [
+    "onCommand:rxl.add",
+    "onCommand:rxl.remove",
+    "onCommand:rxl.apply"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "rxl.add",
+        "title": "Rx lib: Add regex"
+      },
+      {
+        "command": "rxl.remove",
+        "title": "Rx lib: Remove regex"
+      },
+      {
+        "command": "rxl.apply",
+        "title": "Rx lib: Apply regex"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "rxl.apply"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Rx lib",
+      "properties": {
+        "rxl": {
+          "type": "object",
+          "description": "Library of `sed` style regular expressions for re-use in the form of `\"name\": \"pattern\"`.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "pattern": {
+                "type": "string",
+                "description": "Sed style regular expression, NOTE: backslashes must be escaped."
+              },
+              "used": {
+                "type": "number",
+                "description": "Internal: timestamp of last use."
+              }
+            },
+            "required": [
+              "pattern"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.63.0",
+    "@vscode/vsce": "^3.2.1",
+    "shx": "^0.3.4",
+    "typescript": ">=4.8.4"
+  },
+  "overrides": {
+    "glob": ">=8.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/txret/rxl.git"
+  }
+}
